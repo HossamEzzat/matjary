@@ -1,35 +1,29 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:matjary/features/dashboard/presentation/cubit/dashboard_cubit.dart';
-import 'package:matjary/features/dashboard/presentation/cubit/dashboard_state.dart';
-import 'package:matjary/features/suppliers/presentation/screens/suppliers_list_screen.dart';
-import 'package:matjary/features/customers/presentation/screens/customers_list_screen.dart';
-import 'package:matjary/features/transactions/presentation/screens/transactions_list_screen.dart';
-import 'package:matjary/features/suppliers/domain/repositories/supplier_repository.dart';
-import 'package:matjary/features/customers/domain/repositories/customer_repository.dart';
+import 'package:khazina/features/dashboard/presentation/cubit/dashboard_cubit.dart';
+import 'package:khazina/features/dashboard/presentation/cubit/dashboard_state.dart';
+import 'package:khazina/features/suppliers/presentation/screens/suppliers_list_screen.dart';
+import 'package:khazina/features/customers/presentation/screens/customers_list_screen.dart';
+import 'package:khazina/features/transactions/presentation/screens/transactions_list_screen.dart';
+import 'package:khazina/features/suppliers/domain/repositories/supplier_repository.dart';
+import 'package:khazina/features/customers/domain/repositories/customer_repository.dart';
+import 'package:khazina/features/transactions/domain/repositories/transaction_repository.dart';
 
 class DashboardScreen extends StatelessWidget {
   const DashboardScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
-    // Note: BlocProvider creation is in local scope or above?
-    // In previous code, I created it here. I should keep it.
-    // However, context.read won't work inside create for sibling.
-    // I need to be careful. The repos are provided in main.
-
-    // Also need to handle refreshing data when coming back.
-    // I previously looked at .then() in navigation.
-
     return BlocProvider(
       create: (context) => DashboardCubit(
         supplierRepository: context.read<SupplierRepository>(),
         customerRepository: context.read<CustomerRepository>(),
+        transactionRepository: context.read<TransactionRepository>(),
       )..loadDashboardData(),
       child: Scaffold(
         appBar: AppBar(
           title: const Text(
-            'لوحة التحكم',
+            'Khazina - خزينة',
             style: TextStyle(fontWeight: FontWeight.bold),
           ),
         ),
@@ -37,7 +31,7 @@ class DashboardScreen extends StatelessWidget {
           builder: (context, state) {
             if (state is DashboardLoading) {
               return const Center(
-                child: CircularProgressIndicator(color: Color(0xFFD4AF37)),
+                child: CircularProgressIndicator(color: Color(0xFFF59E0B)),
               );
             } else if (state is DashboardError) {
               return Center(child: Text('خطأ: ${state.message}'));
@@ -47,23 +41,40 @@ class DashboardScreen extends StatelessWidget {
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.stretch,
                   children: [
-                    _buildSummaryCard(
+                    _buildTreasuryCard(
                       context,
-                      'عليك (للموردين)',
-                      state.totalPayables,
-                      const Color(0xFFCF6679),
-                      Icons.arrow_circle_down_rounded,
+                      'خزينة المحل',
+                      state.totalTreasury,
+                      const Color(0xFFF59E0B),
+                      Icons.account_balance_wallet_rounded,
                     ),
                     const SizedBox(height: 16),
-                    _buildSummaryCard(
-                      context,
-                      'لك (من العملاء)',
-                      state.totalReceivables,
-                      const Color(0xFF00897B),
-                      Icons.arrow_circle_up_rounded,
+                    Row(
+                      children: [
+                        Expanded(
+                          child: _buildSummaryCard(
+                            context,
+                            'عليك',
+                            state.totalPayables,
+                            const Color(0xFFEF4444),
+                            Icons.arrow_circle_down_rounded,
+                            isSmall: true,
+                          ),
+                        ),
+                        const SizedBox(width: 12),
+                        Expanded(
+                          child: _buildSummaryCard(
+                            context,
+                            'لك',
+                            state.totalReceivables,
+                            const Color(0xFF10B981),
+                            Icons.arrow_circle_up_rounded,
+                            isSmall: true,
+                          ),
+                        ),
+                      ],
                     ),
                     const SizedBox(height: 32),
-
                     _buildMenuButton(
                       context,
                       'إدارة الموردين',
@@ -128,7 +139,7 @@ class DashboardScreen extends StatelessWidget {
     );
   }
 
-  Widget _buildSummaryCard(
+  Widget _buildTreasuryCard(
     BuildContext context,
     String title,
     double amount,
@@ -137,7 +148,67 @@ class DashboardScreen extends StatelessWidget {
   ) {
     return Container(
       decoration: BoxDecoration(
-        color: Theme.of(context).cardTheme.color,
+        gradient: LinearGradient(
+          colors: [color.withValues(alpha: 0.8), color.withValues(alpha: 0.6)],
+          begin: Alignment.topLeft,
+          end: Alignment.bottomRight,
+        ),
+        borderRadius: BorderRadius.circular(24),
+        boxShadow: [
+          BoxShadow(
+            color: color.withValues(alpha: 0.3),
+            blurRadius: 15,
+            offset: const Offset(0, 8),
+          ),
+        ],
+      ),
+      padding: const EdgeInsets.all(24),
+      child: Column(
+        children: [
+          Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              Text(
+                title,
+                style: const TextStyle(
+                  fontSize: 18,
+                  fontWeight: FontWeight.bold,
+                  color: Colors.white,
+                ),
+              ),
+              Icon(icon, color: Colors.white, size: 28),
+            ],
+          ),
+          const SizedBox(height: 12),
+          Text(
+            amount.toStringAsFixed(2),
+            style: const TextStyle(
+              fontSize: 36,
+              fontWeight: FontWeight.bold,
+              color: Colors.white,
+              fontFamily: 'Roboto',
+            ),
+          ),
+          const Text(
+            'ريال',
+            style: TextStyle(color: Colors.white70, fontSize: 14),
+          ),
+        ],
+      ),
+    );
+  }
+
+  Widget _buildSummaryCard(
+    BuildContext context,
+    String title,
+    double amount,
+    Color color,
+    IconData icon, {
+    bool isSmall = false,
+  }) {
+    return Container(
+      decoration: BoxDecoration(
+        color: const Color(0xFF1E293B), // Slate Card
         borderRadius: BorderRadius.circular(20),
         boxShadow: [
           BoxShadow(
@@ -146,38 +217,46 @@ class DashboardScreen extends StatelessWidget {
             offset: const Offset(0, 5),
           ),
         ],
-        border: Border.all(color: color.withValues(alpha: 0.3), width: 1),
+        border: Border.all(color: color.withValues(alpha: 0.2), width: 1),
       ),
-      padding: const EdgeInsets.all(24),
+      padding: EdgeInsets.all(isSmall ? 16 : 24),
       child: Row(
         children: [
           Container(
-            padding: const EdgeInsets.all(12),
+            padding: EdgeInsets.all(isSmall ? 8 : 12),
             decoration: BoxDecoration(
               color: color.withValues(alpha: 0.1),
               shape: BoxShape.circle,
             ),
-            child: Icon(icon, color: color, size: 32),
+            child: Icon(icon, color: color, size: isSmall ? 24 : 32),
           ),
-          const SizedBox(width: 20),
-          Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Text(
-                title,
-                style: TextStyle(fontSize: 16, color: Colors.grey[400]),
-              ),
-              const SizedBox(height: 4),
-              Text(
-                amount.toStringAsFixed(2),
-                style: TextStyle(
-                  fontSize: 28,
-                  fontWeight: FontWeight.bold,
-                  color: color,
-                  fontFamily: 'Roboto', // Numbers look better in Roboto
+          SizedBox(width: isSmall ? 12 : 20),
+          Expanded(
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              mainAxisSize: MainAxisSize.min,
+              children: [
+                Text(
+                  title,
+                  style: TextStyle(
+                    fontSize: isSmall ? 12 : 16,
+                    color: Colors.grey[400],
+                    fontWeight: FontWeight.w500,
+                  ),
+                  overflow: TextOverflow.ellipsis,
                 ),
-              ),
-            ],
+                const SizedBox(height: 4),
+                Text(
+                  amount.toStringAsFixed(2),
+                  style: TextStyle(
+                    fontSize: isSmall ? 18 : 28,
+                    fontWeight: FontWeight.bold,
+                    color: color,
+                    fontFamily: 'Roboto',
+                  ),
+                ),
+              ],
+            ),
           ),
         ],
       ),
@@ -192,22 +271,36 @@ class DashboardScreen extends StatelessWidget {
   ) {
     return InkWell(
       onTap: onTap,
-      borderRadius: BorderRadius.circular(16),
+      borderRadius: BorderRadius.circular(20),
       child: Ink(
-        height: 80,
+        height: 90,
         decoration: BoxDecoration(
-          color: const Color(0xFF2C2C2C),
-          borderRadius: BorderRadius.circular(16),
+          color: const Color(0xFF1E293B),
+          borderRadius: BorderRadius.circular(20),
           border: Border.all(
-            color: const Color(0xFFD4AF37).withValues(alpha: 0.2),
+            color: const Color(0xFFF59E0B).withValues(alpha: 0.1),
           ),
+          boxShadow: [
+            BoxShadow(
+              color: Colors.black.withValues(alpha: 0.1),
+              blurRadius: 8,
+              offset: const Offset(0, 4),
+            ),
+          ],
         ),
         child: Padding(
           padding: const EdgeInsets.symmetric(horizontal: 24),
           child: Row(
             children: [
-              Icon(icon, color: const Color(0xFFD4AF37), size: 28),
-              const SizedBox(width: 24),
+              Container(
+                padding: const EdgeInsets.all(12),
+                decoration: BoxDecoration(
+                  color: const Color(0xFFF59E0B).withValues(alpha: 0.1),
+                  borderRadius: BorderRadius.circular(12),
+                ),
+                child: Icon(icon, color: const Color(0xFFF59E0B), size: 28),
+              ),
+              const SizedBox(width: 20),
               Text(
                 title,
                 style: const TextStyle(

@@ -1,5 +1,5 @@
 import 'package:equatable/equatable.dart';
-import 'package:matjary/features/suppliers/domain/entities/supplier.dart';
+import 'package:khazina/features/suppliers/domain/entities/supplier.dart';
 
 abstract class SuppliersState extends Equatable {
   const SuppliersState();

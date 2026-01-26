@@ -42,7 +42,7 @@ void main() async {
   );
 
   runApp(
-    MatjaryApp(
+    KhazinaApp(
       supplierBox: supplierBox,
       customerBox: customerBox,
       transactionBox: transactionBox,
@@ -50,12 +50,12 @@ void main() async {
   );
 }
 
-class MatjaryApp extends StatelessWidget {
+class KhazinaApp extends StatelessWidget {
   final Box<SupplierModel> supplierBox;
   final Box<CustomerModel> customerBox;
   final Box<TransactionModel> transactionBox;
 
-  const MatjaryApp({
+  const KhazinaApp({
     super.key,
     required this.supplierBox,
     required this.customerBox,
@@ -89,7 +89,7 @@ class MatjaryApp extends StatelessWidget {
         ),
       ],
       child: MaterialApp(
-        title: 'دفتري - Daftari',
+        title: 'Khazina - خزينة',
         debugShowCheckedModeBanner: false,
         locale: const Locale('ar'),
         supportedLocales: const [Locale('ar'), Locale('en')],
@@ -100,29 +100,21 @@ class MatjaryApp extends StatelessWidget {
         ],
         theme: ThemeData(
           brightness: Brightness.dark,
-          scaffoldBackgroundColor: const Color(0xFF121212),
-          primaryColor: const Color(0xFFD4AF37), // Gold
+          scaffoldBackgroundColor: const Color(0xFF0F172A), // Slate Dark
+          primaryColor: const Color(0xFFF59E0B), // Amber/Golden
           colorScheme: const ColorScheme.dark(
-            primary: Color(0xFFD4AF37), // Gold
-            secondary: Color(0xFF00897B), // Teal
-            surface: Color(0xFF1E1E1E), // Dark Grey Card
-            // background: Color(0xFF121212), // Deprecated, using scaffoldBackgroundColor
-            error: Color(0xFFCF6679),
+            primary: Color(0xFFF59E0B),
+            secondary: Color(0xFF10B981), // Emerald
+            surface: Color(0xFF1E293B), // Slate Card
+            error: Color(0xFFEF4444),
           ),
           useMaterial3: true,
           textTheme: GoogleFonts.cairoTextTheme(ThemeData.dark().textTheme),
           appBarTheme: const AppBarTheme(
-            backgroundColor: Color(0xFF1E1E1E),
+            backgroundColor: Color(0xFF1E293B),
             elevation: 0,
             centerTitle: true,
           ),
-          // cardTheme: CardTheme(
-          //   color: const Color(0xFF1E1E1E),
-          //   elevation: 4,
-          //   shape: RoundedRectangleBorder(
-          //     borderRadius: BorderRadius.circular(12),
-          //   ),
-          // ),
         ),
         home: const DashboardScreen(),
       ),

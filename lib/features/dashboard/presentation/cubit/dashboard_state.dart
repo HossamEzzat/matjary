@@ -14,14 +14,16 @@ class DashboardLoading extends DashboardState {}
 class DashboardLoaded extends DashboardState {
   final double totalPayables; // What we owe suppliers
   final double totalReceivables; // What customers owe us
+  final double totalTreasury;
 
   const DashboardLoaded({
     required this.totalPayables,
     required this.totalReceivables,
+    required this.totalTreasury,
   });
 
   @override
-  List<Object> get props => [totalPayables, totalReceivables];
+  List<Object> get props => [totalPayables, totalReceivables, totalTreasury];
 }
 
 class DashboardError extends DashboardState {

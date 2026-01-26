@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:matjary/features/suppliers/domain/entities/supplier.dart';
-import 'package:matjary/features/transactions/presentation/cubit/transaction_cubit.dart';
-import 'package:matjary/features/transactions/presentation/cubit/transaction_state.dart';
-import 'package:matjary/features/transactions/domain/repositories/transaction_repository.dart';
-import 'package:matjary/features/suppliers/domain/repositories/supplier_repository.dart';
-import 'package:matjary/core/constants/enums.dart';
-import 'package:matjary/features/transactions/domain/entities/transaction.dart';
+import 'package:khazina/features/suppliers/domain/entities/supplier.dart';
+import 'package:khazina/features/transactions/presentation/cubit/transaction_cubit.dart';
+import 'package:khazina/features/transactions/presentation/cubit/transaction_state.dart';
+import 'package:khazina/features/transactions/domain/repositories/transaction_repository.dart';
+import 'package:khazina/features/suppliers/domain/repositories/supplier_repository.dart';
+import 'package:khazina/core/constants/enums.dart';
+import 'package:khazina/features/transactions/domain/entities/transaction.dart';
 import 'package:uuid/uuid.dart';
 
 class SupplierDetailsScreen extends StatelessWidget {
@@ -121,7 +121,7 @@ class _SupplierDetailsViewState extends State<SupplierDetailsView> {
             padding: const EdgeInsets.all(24),
             decoration: BoxDecoration(
               gradient: const LinearGradient(
-                colors: [Color(0xFF1E1E1E), Color(0xFF252525)],
+                colors: [Color(0xFF1E293B), Color(0xFF0F172A)],
                 begin: Alignment.topLeft,
                 end: Alignment.bottomRight,
               ),
@@ -134,7 +134,7 @@ class _SupplierDetailsViewState extends State<SupplierDetailsView> {
                 ),
               ],
               border: Border.all(
-                color: const Color(0xFFD4AF37).withValues(alpha: 0.3),
+                color: const Color(0xFFF59E0B).withValues(alpha: 0.2),
               ),
             ),
             child: Column(
@@ -163,8 +163,8 @@ class _SupplierDetailsViewState extends State<SupplierDetailsView> {
                   style: TextStyle(
                     fontSize: 14,
                     color: currentSupplier.balance > 0
-                        ? const Color(0xFFCF6679)
-                        : const Color(0xFF00897B),
+                        ? const Color(0xFFEF4444)
+                        : const Color(0xFF10B981),
                   ),
                 ),
                 const SizedBox(height: 24),
@@ -187,7 +187,7 @@ class _SupplierDetailsViewState extends State<SupplierDetailsView> {
                           TransactionType.debt,
                         ),
                         style: ElevatedButton.styleFrom(
-                          backgroundColor: const Color(0xFFCF6679),
+                          backgroundColor: const Color(0xFFEF4444),
                           padding: const EdgeInsets.symmetric(vertical: 12),
                           shape: RoundedRectangleBorder(
                             borderRadius: BorderRadius.circular(10),
@@ -213,7 +213,7 @@ class _SupplierDetailsViewState extends State<SupplierDetailsView> {
                           TransactionType.payment,
                         ),
                         style: ElevatedButton.styleFrom(
-                          backgroundColor: const Color(0xFF00897B),
+                          backgroundColor: const Color(0xFF10B981),
                           padding: const EdgeInsets.symmetric(vertical: 12),
                           shape: RoundedRectangleBorder(
                             borderRadius: BorderRadius.circular(10),
@@ -245,7 +245,7 @@ class _SupplierDetailsViewState extends State<SupplierDetailsView> {
               builder: (context, state) {
                 if (state is TransactionLoading) {
                   return const Center(
-                    child: CircularProgressIndicator(color: Color(0xFFD4AF37)),
+                    child: CircularProgressIndicator(color: Color(0xFFF59E0B)),
                   );
                 }
                 if (state is TransactionLoaded) {
@@ -267,13 +267,13 @@ class _SupplierDetailsViewState extends State<SupplierDetailsView> {
                         padding: const EdgeInsets.only(bottom: 12),
                         child: Container(
                           decoration: BoxDecoration(
-                            color: const Color(0xFF1E1E1E),
+                            color: const Color(0xFF1E293B),
                             borderRadius: BorderRadius.circular(12),
                             border: Border(
                               right: BorderSide(
                                 color: isDebt
-                                    ? const Color(0xFFCF6679)
-                                    : const Color(0xFF00897B),
+                                    ? const Color(0xFFEF4444)
+                                    : const Color(0xFF10B981),
                                 width: 4,
                               ),
                             ),
@@ -338,8 +338,8 @@ class _SupplierDetailsViewState extends State<SupplierDetailsView> {
                                 fontWeight: FontWeight.bold,
                                 fontSize: 16,
                                 color: isDebt
-                                    ? const Color(0xFFCF6679)
-                                    : const Color(0xFF00897B),
+                                    ? const Color(0xFFEF4444)
+                                    : const Color(0xFF10B981),
                               ),
                             ),
                           ),
@@ -444,7 +444,7 @@ class _AddTransactionDialogState extends State<AddTransactionDialog> {
                 borderRadius: BorderRadius.circular(12),
               ),
               focusedBorder: OutlineInputBorder(
-                borderSide: const BorderSide(color: Color(0xFFD4AF37)),
+                borderSide: const BorderSide(color: Color(0xFFF59E0B)),
                 borderRadius: BorderRadius.circular(12),
               ),
             ),
@@ -458,7 +458,7 @@ class _AddTransactionDialogState extends State<AddTransactionDialog> {
         ),
         ElevatedButton(
           style: ElevatedButton.styleFrom(
-            backgroundColor: const Color(0xFFD4AF37),
+            backgroundColor: const Color(0xFFF59E0B),
             foregroundColor: Colors.black,
           ),
           onPressed: () {

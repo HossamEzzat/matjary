@@ -1,7 +1,7 @@
-import 'package:matjary/features/suppliers/data/datasources/supplier_local_data_source.dart';
-import 'package:matjary/features/suppliers/data/models/supplier_model.dart';
-import 'package:matjary/features/suppliers/domain/entities/supplier.dart';
-import 'package:matjary/features/suppliers/domain/repositories/supplier_repository.dart';
+import 'package:khazina/features/suppliers/data/datasources/supplier_local_data_source.dart';
+import 'package:khazina/features/suppliers/data/models/supplier_model.dart';
+import 'package:khazina/features/suppliers/domain/entities/supplier.dart';
+import 'package:khazina/features/suppliers/domain/repositories/supplier_repository.dart';
 
 class SupplierRepositoryImpl implements SupplierRepository {
   final SupplierLocalDataSource localDataSource;

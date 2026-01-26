@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:matjary/features/customers/domain/entities/customer.dart';
-import 'package:matjary/features/transactions/presentation/cubit/transaction_cubit.dart';
-import 'package:matjary/features/transactions/presentation/cubit/transaction_state.dart';
-import 'package:matjary/features/transactions/domain/repositories/transaction_repository.dart';
-import 'package:matjary/features/customers/domain/repositories/customer_repository.dart';
-import 'package:matjary/core/constants/enums.dart';
-import 'package:matjary/features/transactions/domain/entities/transaction.dart';
+import 'package:khazina/features/customers/domain/entities/customer.dart';
+import 'package:khazina/features/transactions/presentation/cubit/transaction_cubit.dart';
+import 'package:khazina/features/transactions/presentation/cubit/transaction_state.dart';
+import 'package:khazina/features/transactions/domain/repositories/transaction_repository.dart';
+import 'package:khazina/features/customers/domain/repositories/customer_repository.dart';
+import 'package:khazina/core/constants/enums.dart';
+import 'package:khazina/features/transactions/domain/entities/transaction.dart';
 import 'package:uuid/uuid.dart';
 
 class CustomerDetailsScreen extends StatelessWidget {
@@ -120,7 +120,7 @@ class _CustomerDetailsViewState extends State<CustomerDetailsView> {
             padding: const EdgeInsets.all(24),
             decoration: BoxDecoration(
               gradient: const LinearGradient(
-                colors: [Color(0xFF1E1E1E), Color(0xFF252525)],
+                colors: [Color(0xFF1E293B), Color(0xFF0F172A)],
                 begin: Alignment.topLeft,
                 end: Alignment.bottomRight,
               ),
@@ -133,7 +133,7 @@ class _CustomerDetailsViewState extends State<CustomerDetailsView> {
                 ),
               ],
               border: Border.all(
-                color: const Color(0xFFD4AF37).withValues(alpha: 0.3),
+                color: const Color(0xFFF59E0B).withValues(alpha: 0.2),
               ),
             ),
             child: Column(
@@ -150,8 +150,8 @@ class _CustomerDetailsViewState extends State<CustomerDetailsView> {
                     fontWeight: FontWeight.bold,
                     fontFamily: 'Roboto',
                     color: currentCustomer.balance > 0
-                        ? const Color(0xFF00897B) // Green for Asset (Lak)
-                        : const Color(0xFFCF6679),
+                        ? const Color(0xFF10B981) // Green for Asset (Lak)
+                        : const Color(0xFFEF4444),
                   ),
                 ),
                 const SizedBox(height: 4),
@@ -162,8 +162,8 @@ class _CustomerDetailsViewState extends State<CustomerDetailsView> {
                   style: TextStyle(
                     fontSize: 14,
                     color: currentCustomer.balance > 0
-                        ? const Color(0xFF00897B)
-                        : const Color(0xFFCF6679),
+                        ? const Color(0xFF10B981)
+                        : const Color(0xFFEF4444),
                   ),
                 ),
                 const SizedBox(height: 24),
@@ -184,7 +184,7 @@ class _CustomerDetailsViewState extends State<CustomerDetailsView> {
                         ),
                         style: ElevatedButton.styleFrom(
                           backgroundColor: const Color(
-                            0xFFCF6679,
+                            0xFFEF4444,
                           ), // Redish for debt increasing? Or maybe keep consistent? Let's use generic styles.
                           // Actually, Selling is Good, but it increases debt.
                           // Let's stick to: Debt Action = Red/Warning? Or maybe consistent with Supplier.
@@ -216,7 +216,7 @@ class _CustomerDetailsViewState extends State<CustomerDetailsView> {
                           TransactionType.payment,
                         ),
                         style: ElevatedButton.styleFrom(
-                          backgroundColor: const Color(0xFF00897B),
+                          backgroundColor: const Color(0xFF10B981),
                           padding: const EdgeInsets.symmetric(vertical: 12),
                           shape: RoundedRectangleBorder(
                             borderRadius: BorderRadius.circular(10),
@@ -248,7 +248,7 @@ class _CustomerDetailsViewState extends State<CustomerDetailsView> {
               builder: (context, state) {
                 if (state is TransactionLoading) {
                   return const Center(
-                    child: CircularProgressIndicator(color: Color(0xFFD4AF37)),
+                    child: CircularProgressIndicator(color: Color(0xFFF59E0B)),
                   );
                 }
                 if (state is TransactionLoaded) {
@@ -270,13 +270,13 @@ class _CustomerDetailsViewState extends State<CustomerDetailsView> {
                         padding: const EdgeInsets.only(bottom: 12),
                         child: Container(
                           decoration: BoxDecoration(
-                            color: const Color(0xFF1E1E1E),
+                            color: const Color(0xFF1E293B),
                             borderRadius: BorderRadius.circular(12),
                             border: Border(
                               right: BorderSide(
                                 color: isDebt
-                                    ? const Color(0xFFCF6679)
-                                    : const Color(0xFF00897B),
+                                    ? const Color(0xFFEF4444)
+                                    : const Color(0xFF10B981),
                                 width: 4,
                               ),
                             ),
@@ -341,8 +341,8 @@ class _CustomerDetailsViewState extends State<CustomerDetailsView> {
                                 fontWeight: FontWeight.bold,
                                 fontSize: 16,
                                 color: isDebt
-                                    ? const Color(0xFFCF6679)
-                                    : const Color(0xFF00897B),
+                                    ? const Color(0xFFEF4444)
+                                    : const Color(0xFF10B981),
                               ),
                             ),
                           ),
@@ -441,7 +441,7 @@ class _AddTransactionDialogState extends State<AddTransactionDialog> {
                 borderRadius: BorderRadius.circular(12),
               ),
               focusedBorder: OutlineInputBorder(
-                borderSide: const BorderSide(color: Color(0xFFD4AF37)),
+                borderSide: const BorderSide(color: Color(0xFFF59E0B)),
                 borderRadius: BorderRadius.circular(12),
               ),
             ),
@@ -455,7 +455,7 @@ class _AddTransactionDialogState extends State<AddTransactionDialog> {
         ),
         ElevatedButton(
           style: ElevatedButton.styleFrom(
-            backgroundColor: const Color(0xFFD4AF37),
+            backgroundColor: const Color(0xFFF59E0B),
             foregroundColor: Colors.black,
           ),
           onPressed: () {

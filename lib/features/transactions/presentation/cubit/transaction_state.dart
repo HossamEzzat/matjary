@@ -1,5 +1,5 @@
 import 'package:equatable/equatable.dart';
-import 'package:matjary/features/transactions/domain/entities/transaction.dart';
+import 'package:khazina/features/transactions/domain/entities/transaction.dart';
 
 abstract class TransactionState extends Equatable {
   const TransactionState();

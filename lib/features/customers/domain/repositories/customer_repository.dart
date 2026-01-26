@@ -1,4 +1,4 @@
-import 'package:matjary/features/customers/domain/entities/customer.dart';
+import 'package:khazina/features/customers/domain/entities/customer.dart';
 
 abstract class CustomerRepository {
   Future<List<Customer>> getCustomers();

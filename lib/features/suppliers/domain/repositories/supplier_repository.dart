@@ -1,4 +1,4 @@
-import 'package:matjary/features/suppliers/domain/entities/supplier.dart';
+import 'package:khazina/features/suppliers/domain/entities/supplier.dart';
 
 abstract class SupplierRepository {
   Future<List<Supplier>> getSuppliers();

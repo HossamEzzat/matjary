@@ -1,4 +1,4 @@
-package com.hossamaboroka.matjary
+package com.hossamaboroka.khazina
 
 import io.flutter.embedding.android.FlutterActivity
 

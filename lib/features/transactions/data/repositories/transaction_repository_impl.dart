@@ -1,7 +1,7 @@
-import 'package:matjary/features/transactions/data/datasources/transaction_local_data_source.dart';
-import 'package:matjary/features/transactions/data/models/transaction_model.dart';
-import 'package:matjary/features/transactions/domain/entities/transaction.dart';
-import 'package:matjary/features/transactions/domain/repositories/transaction_repository.dart';
+import 'package:khazina/features/transactions/data/datasources/transaction_local_data_source.dart';
+import 'package:khazina/features/transactions/data/models/transaction_model.dart';
+import 'package:khazina/features/transactions/domain/entities/transaction.dart';
+import 'package:khazina/features/transactions/domain/repositories/transaction_repository.dart';
 
 class TransactionRepositoryImpl implements TransactionRepository {
   final TransactionLocalDataSource localDataSource;

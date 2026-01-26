@@ -1,4 +1,4 @@
-import 'package:matjary/features/transactions/domain/entities/transaction.dart';
+import 'package:khazina/features/transactions/domain/entities/transaction.dart';
 
 abstract class TransactionRepository {
   Future<List<Transaction>> getAllTransactions();

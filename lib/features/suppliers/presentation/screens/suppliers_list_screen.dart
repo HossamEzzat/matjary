@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:matjary/features/suppliers/presentation/cubit/suppliers_cubit.dart';
-import 'package:matjary/features/suppliers/presentation/cubit/suppliers_state.dart';
-import 'package:matjary/features/suppliers/domain/repositories/supplier_repository.dart';
+import 'package:khazina/features/suppliers/presentation/cubit/suppliers_cubit.dart';
+import 'package:khazina/features/suppliers/presentation/cubit/suppliers_state.dart';
+import 'package:khazina/features/suppliers/domain/repositories/supplier_repository.dart';
 import 'add_supplier_screen.dart';
 import 'supplier_details_screen.dart';
 
@@ -27,7 +27,7 @@ class SuppliersListView extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(title: const Text('الموردين')),
       floatingActionButton: FloatingActionButton(
-        backgroundColor: const Color(0xFFD4AF37),
+        backgroundColor: const Color(0xFFF59E0B),
         onPressed: () {
           Navigator.push(
             context,
@@ -45,7 +45,7 @@ class SuppliersListView extends StatelessWidget {
         builder: (context, state) {
           if (state is SuppliersLoading) {
             return const Center(
-              child: CircularProgressIndicator(color: Color(0xFFD4AF37)),
+              child: CircularProgressIndicator(color: Color(0xFFF59E0B)),
             );
           } else if (state is SuppliersError) {
             return Center(child: Text('خطأ: ${state.message}'));
@@ -76,12 +76,12 @@ class SuppliersListView extends StatelessWidget {
                     ),
                     leading: CircleAvatar(
                       backgroundColor: const Color(
-                        0xFFD4AF37,
-                      ).withValues(alpha: 0.2),
+                        0xFFF59E0B,
+                      ).withValues(alpha: 0.1),
                       child: Text(
                         supplier.name[0].toUpperCase(),
                         style: const TextStyle(
-                          color: Color(0xFFD4AF37),
+                          color: Color(0xFFF59E0B),
                           fontWeight: FontWeight.bold,
                         ),
                       ),
@@ -107,8 +107,8 @@ class SuppliersListView extends StatelessWidget {
                                 fontSize: 16,
                                 fontWeight: FontWeight.bold,
                                 color: supplier.balance > 0
-                                    ? const Color(0xFFCF6679)
-                                    : const Color(0xFF00897B),
+                                    ? const Color(0xFFEF4444)
+                                    : const Color(0xFF10B981),
                                 fontFamily: 'Roboto',
                               ),
                             ),
@@ -117,8 +117,8 @@ class SuppliersListView extends StatelessWidget {
                               style: TextStyle(
                                 fontSize: 12,
                                 color: supplier.balance > 0
-                                    ? const Color(0xFFCF6679)
-                                    : const Color(0xFF00897B),
+                                    ? const Color(0xFFEF4444)
+                                    : const Color(0xFF10B981),
                               ),
                             ),
                           ],
@@ -207,7 +207,7 @@ class SuppliersListView extends StatelessWidget {
               style: const TextStyle(color: Colors.white),
               decoration: const InputDecoration(
                 labelText: "اسم المورد",
-                prefixIcon: Icon(Icons.person, color: Color(0xFFD4AF37)),
+                prefixIcon: Icon(Icons.person, color: Color(0xFFF59E0B)),
               ),
             ),
             const SizedBox(height: 16),
@@ -216,7 +216,7 @@ class SuppliersListView extends StatelessWidget {
               style: const TextStyle(color: Colors.white),
               decoration: const InputDecoration(
                 labelText: "رقم الهاتف",
-                prefixIcon: Icon(Icons.phone, color: Color(0xFFD4AF37)),
+                prefixIcon: Icon(Icons.phone, color: Color(0xFFF59E0B)),
               ),
             ),
           ],
@@ -228,7 +228,7 @@ class SuppliersListView extends StatelessWidget {
           ),
           ElevatedButton(
             style: ElevatedButton.styleFrom(
-              backgroundColor: const Color(0xFFD4AF37),
+              backgroundColor: const Color(0xFFF59E0B),
               foregroundColor: Colors.black,
             ),
             onPressed: () {

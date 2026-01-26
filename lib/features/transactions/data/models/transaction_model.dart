@@ -1,5 +1,5 @@
 import 'package:hive/hive.dart';
-import 'package:matjary/core/constants/enums.dart';
+import 'package:khazina/core/constants/enums.dart';
 import '../../domain/entities/transaction.dart';
 
 part 'transaction_model.g.dart';

@@ -1,7 +1,7 @@
-import 'package:matjary/features/customers/data/datasources/customer_local_data_source.dart';
-import 'package:matjary/features/customers/data/models/customer_model.dart';
-import 'package:matjary/features/customers/domain/entities/customer.dart';
-import 'package:matjary/features/customers/domain/repositories/customer_repository.dart';
+import 'package:khazina/features/customers/data/datasources/customer_local_data_source.dart';
+import 'package:khazina/features/customers/data/models/customer_model.dart';
+import 'package:khazina/features/customers/domain/entities/customer.dart';
+import 'package:khazina/features/customers/domain/repositories/customer_repository.dart';
 
 class CustomerRepositoryImpl implements CustomerRepository {
   final CustomerLocalDataSource localDataSource;

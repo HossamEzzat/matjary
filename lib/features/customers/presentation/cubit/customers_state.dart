@@ -1,5 +1,5 @@
 import 'package:equatable/equatable.dart';
-import 'package:matjary/features/customers/domain/entities/customer.dart';
+import 'package:khazina/features/customers/domain/entities/customer.dart';
 
 abstract class CustomersState extends Equatable {
   const CustomersState();

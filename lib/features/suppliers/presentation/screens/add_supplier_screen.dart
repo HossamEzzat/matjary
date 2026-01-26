@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:uuid/uuid.dart';
-import 'package:matjary/features/suppliers/presentation/cubit/suppliers_cubit.dart';
-import 'package:matjary/features/suppliers/domain/entities/supplier.dart';
+import 'package:khazina/features/suppliers/presentation/cubit/suppliers_cubit.dart';
+import 'package:khazina/features/suppliers/domain/entities/supplier.dart';
 
 class AddSupplierScreen extends StatefulWidget {
   const AddSupplierScreen({super.key});
@@ -35,7 +35,7 @@ class _AddSupplierScreenState extends State<AddSupplierScreen> {
                 height: 50,
                 child: ElevatedButton(
                   style: ElevatedButton.styleFrom(
-                    backgroundColor: const Color(0xFFD4AF37),
+                    backgroundColor: const Color(0xFFF59E0B),
                     foregroundColor: Colors.black,
                     shape: RoundedRectangleBorder(
                       borderRadius: BorderRadius.circular(12),
@@ -76,11 +76,11 @@ class _AddSupplierScreenState extends State<AddSupplierScreen> {
       style: const TextStyle(color: Colors.white),
       decoration: InputDecoration(
         labelText: label,
-        prefixIcon: Icon(icon, color: const Color(0xFFD4AF37)),
+        prefixIcon: Icon(icon, color: const Color(0xFFF59E0B)),
         border: OutlineInputBorder(borderRadius: BorderRadius.circular(12)),
         focusedBorder: OutlineInputBorder(
           borderRadius: BorderRadius.circular(12),
-          borderSide: const BorderSide(color: Color(0xFFD4AF37), width: 2),
+          borderSide: const BorderSide(color: Color(0xFFF59E0B), width: 2),
         ),
       ),
       validator: (value) => value == null || value.isEmpty ? 'مطلوب' : null,

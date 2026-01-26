@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:matjary/features/transactions/presentation/cubit/transaction_cubit.dart';
-import 'package:matjary/features/transactions/presentation/cubit/transaction_state.dart';
-import 'package:matjary/features/transactions/domain/repositories/transaction_repository.dart';
-import 'package:matjary/core/constants/enums.dart';
+import 'package:khazina/features/transactions/presentation/cubit/transaction_cubit.dart';
+import 'package:khazina/features/transactions/presentation/cubit/transaction_state.dart';
+import 'package:khazina/features/transactions/domain/repositories/transaction_repository.dart';
+import 'package:khazina/core/constants/enums.dart';
 
 class TransactionsListScreen extends StatelessWidget {
   const TransactionsListScreen({super.key});
@@ -44,25 +44,46 @@ class TransactionsListView extends StatelessWidget {
               );
             }
             return ListView.builder(
-              padding: const EdgeInsets.all(12),
+              padding: const EdgeInsets.all(16),
               itemCount: state.transactions.length,
               itemBuilder: (context, index) {
                 final transaction = state.transactions[index];
                 final isPayment = transaction.type == TransactionType.payment;
-                return Card(
-                  color: const Color(0xFF1E1E1E),
+                return Container(
                   margin: const EdgeInsets.only(bottom: 12),
-                  shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(12),
+                  decoration: BoxDecoration(
+                    color: const Color(0xFF1E293B), // Slate Card
+                    borderRadius: BorderRadius.circular(16),
+                    border: Border.all(
+                      color:
+                          (isPayment
+                                  ? const Color(0xFF10B981)
+                                  : const Color(0xFFEF4444))
+                              .withValues(alpha: 0.1),
+                      width: 1,
+                    ),
                   ),
                   child: ListTile(
-                    leading: CircleAvatar(
-                      backgroundColor: isPayment
-                          ? Colors.green.withValues(alpha: 0.2)
-                          : Colors.red.withValues(alpha: 0.2),
+                    contentPadding: const EdgeInsets.symmetric(
+                      horizontal: 16,
+                      vertical: 8,
+                    ),
+                    leading: Container(
+                      padding: const EdgeInsets.all(10),
+                      decoration: BoxDecoration(
+                        color:
+                            (isPayment
+                                    ? const Color(0xFF10B981)
+                                    : const Color(0xFFEF4444))
+                                .withValues(alpha: 0.1),
+                        shape: BoxShape.circle,
+                      ),
                       child: Icon(
                         isPayment ? Icons.arrow_downward : Icons.arrow_upward,
-                        color: isPayment ? Colors.green : Colors.red,
+                        color: isPayment
+                            ? const Color(0xFF10B981)
+                            : const Color(0xFFEF4444),
+                        size: 24,
                       ),
                     ),
                     title: Text(
@@ -70,20 +91,36 @@ class TransactionsListView extends StatelessWidget {
                       style: const TextStyle(
                         color: Colors.white,
                         fontWeight: FontWeight.bold,
+                        fontSize: 18,
+                        fontFamily: 'Roboto',
                       ),
                     ),
-                    subtitle: Text(
-                      transaction.date.toString().substring(
-                        0,
-                        10,
-                      ), // Simple date format YYYY-MM-DD
-                      style: TextStyle(color: Colors.grey[400]),
+                    subtitle: Padding(
+                      padding: const EdgeInsets.only(top: 4.0),
+                      child: Text(
+                        transaction.date.toString().substring(0, 10),
+                        style: const TextStyle(color: Colors.grey),
+                      ),
                     ),
-                    trailing: Text(
-                      transaction.partyType == PartyType.supplier
-                          ? "مورد"
-                          : "عميل",
-                      style: const TextStyle(color: Color(0xFFD4AF37)),
+                    trailing: Container(
+                      padding: const EdgeInsets.symmetric(
+                        horizontal: 12,
+                        vertical: 4,
+                      ),
+                      decoration: BoxDecoration(
+                        color: const Color(0xFFF59E0B).withValues(alpha: 0.1),
+                        borderRadius: BorderRadius.circular(20),
+                      ),
+                      child: Text(
+                        transaction.partyType == PartyType.supplier
+                            ? "مورد"
+                            : "عميل",
+                        style: const TextStyle(
+                          color: Color(0xFFF59E0B),
+                          fontWeight: FontWeight.bold,
+                          fontSize: 12,
+                        ),
+                      ),
                     ),
                   ),
                 );

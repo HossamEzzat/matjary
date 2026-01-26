@@ -1,5 +1,5 @@
 import 'package:equatable/equatable.dart';
-import 'package:matjary/core/constants/enums.dart';
+import 'package:khazina/core/constants/enums.dart';
 
 class Transaction extends Equatable {
   final String id;
