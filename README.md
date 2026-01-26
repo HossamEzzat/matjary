@@ -1,33 +1,43 @@
-# 📒 Daftari (دفتري)
+# 💰 Khazina (خزينة)
 
-**Daftari** is a premium, local-first financial ledger application designed for small business owners to track debts and payments effortlessly. It allows you to manage "Who owes you" (Lak) and "Who you owe" (Alayk) with a beautiful, user-friendly interface.
+**Khazina** is a premium, local-first financial ledger application designed for small business owners and individuals to track cash flow and store funds effortlessly. Rebranded from Daftari, it now features a powerful **Treasury** management system with a stunned, modern UI.
 
-![App Icon](assets/icon/icon.png)
+![New App Icon](assets/icon/icon.png)
 
 ## ✨ Features
 
-- **Dashboard Overview**: Instant view of total Payables (Alayk) and Receivables (Lak).
+- **Store Treasury (خزينة المحل)**: Real-time tracking of available cash in hand.
+  - `Treasury = (Money Collected from Customers) - (Money Paid to Suppliers)`.
+- **Advanced Dashboard**: Instant overview of:
+  - **Shop Treasury**: Current liquid funds.
+  - **Payables (Alayk)**: Total amount you owe suppliers.
+  - **Receivables (Lak)**: Total amount customers owe you.
 - **Supplier & Customer Management**:
-  - Add, Edit, and Delete profiles.
-  - Track individual balances.
-  - Direct calling from the app.
-- **Transaction Tracking**:
-  - Record **Debts** (Goods sold on credit / Services received).
-  - Record **Payments** (Cash collected / Cash paid).
-  - Automatic balance updates.
-  - Delete transactions with auto-balance reversal.
-- **Premium UI/UX**:
-  - **Dark Mode** with Gold & Teal accents.
-  - **Arabic Support** with full RTL layout.
-  - Smooth animations and modern dialogs.
-- **Local Storage**:
-  - 100% Offline using **Hive**.
-  - Fast performance with no internet required.
+  - Full CRUD (Create, Read, Update, Delete) profiles.
+  - Detailed balance tracking for each party.
+  - Quick action to call parties directly from the app.
+- **Transaction History**:
+  - Record **Debts/Deals** (Credits/Purchases).
+  - Record **Payments/Collections** (Cash In/Out).
+  - Real-time automatic balance recalculation.
+- **Premium UI Overhaul**:
+  - **Deep Slate & Amber Gold** theme for a professional feel.
+  - High-contrast visual cues for money flow (Emerald Green / Crimson Red).
+  - Responsive cards and smooth Arabic RTL support.
+- **Privacy & Performance**:
+  - **100% Local-First** using **Hive**.
+  - No internet required, no data leaves your device.
+  - Lightning-fast startup and processing.
 
 ## 🛠️ Tech Stack
 
 - **Framework**: Flutter
 - **State Management**: BLoC / Cubit
 - **Architecture**: Clean Architecture (Domain, Data, Presentation)
-- **Local Database**: Hive (NoSQL)
-- **Font**: Cairo (Google Fonts)
+- **Database**: Hive (Persistent NoSQL)
+- **UI Design**: Modern Glassmorphism & Custom Gradients
+- **Typography**: Roboto & Cairo (Optimized for Arabic/English)
+
+## 🚀 Version
+
+**v1.1.0+2** - The Treasury Update
