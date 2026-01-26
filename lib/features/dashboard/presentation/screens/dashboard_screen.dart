@@ -190,7 +190,7 @@ class DashboardScreen extends StatelessWidget {
             ),
           ),
           const Text(
-            'ريال',
+            'جنيه',
             style: TextStyle(color: Colors.white70, fontSize: 14),
           ),
         ],
