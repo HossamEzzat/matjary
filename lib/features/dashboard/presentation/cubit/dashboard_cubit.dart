@@ -45,6 +45,9 @@ class DashboardCubit extends Cubit<DashboardState> {
             totalTreasury += tx.amount;
           } else if (tx.partyType == PartyType.supplier) {
             totalTreasury -= tx.amount;
+          } else if (tx.partyType == PartyType.internal) {
+            totalTreasury +=
+                tx.amount; // Positive for deposit, negative for withdrawal
           }
         }
       }

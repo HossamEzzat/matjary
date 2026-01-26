@@ -7,7 +7,10 @@ import 'package:khazina/features/customers/presentation/screens/customers_list_s
 import 'package:khazina/features/transactions/presentation/screens/transactions_list_screen.dart';
 import 'package:khazina/features/suppliers/domain/repositories/supplier_repository.dart';
 import 'package:khazina/features/customers/domain/repositories/customer_repository.dart';
+import 'package:khazina/features/transactions/domain/entities/transaction.dart';
 import 'package:khazina/features/transactions/domain/repositories/transaction_repository.dart';
+import 'package:khazina/core/constants/enums.dart';
+import 'package:khazina/features/dashboard/presentation/cubit/dashboard_cubit.dart';
 
 class DashboardScreen extends StatelessWidget {
   const DashboardScreen({super.key});
@@ -176,7 +179,19 @@ class DashboardScreen extends StatelessWidget {
                   color: Colors.white,
                 ),
               ),
-              Icon(icon, color: Colors.white, size: 28),
+              Row(
+                children: [
+                  IconButton(
+                    icon: const Icon(
+                      Icons.add_circle_outline,
+                      color: Colors.white,
+                    ),
+                    onPressed: () => _showManageTreasuryDialog(context),
+                    tooltip: 'إدارة الخزينة',
+                  ),
+                  Icon(icon, color: Colors.white, size: 28),
+                ],
+              ),
             ],
           ),
           const SizedBox(height: 12),
@@ -194,6 +209,97 @@ class DashboardScreen extends StatelessWidget {
             style: TextStyle(color: Colors.white70, fontSize: 14),
           ),
         ],
+      ),
+    );
+  }
+
+  void _showManageTreasuryDialog(BuildContext context) {
+    final amountController = TextEditingController();
+    bool isDeposit = true;
+
+    showDialog(
+      context: context,
+      builder: (ctx) => StatefulBuilder(
+        builder: (context, setState) => AlertDialog(
+          backgroundColor: const Color(0xFF1E293B),
+          title: const Text("إدارة الخزينة"),
+          content: Column(
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              Row(
+                children: [
+                  Expanded(
+                    child: ChoiceChip(
+                      label: const Text("إيداع"),
+                      selected: isDeposit,
+                      onSelected: (val) => setState(() => isDeposit = true),
+                      selectedColor: const Color(0xFF10B981),
+                    ),
+                  ),
+                  const SizedBox(width: 8),
+                  Expanded(
+                    child: ChoiceChip(
+                      label: const Text("سحب"),
+                      selected: !isDeposit,
+                      onSelected: (val) => setState(() => isDeposit = false),
+                      selectedColor: const Color(0xFFEF4444),
+                    ),
+                  ),
+                ],
+              ),
+              const SizedBox(height: 16),
+              TextField(
+                controller: amountController,
+                keyboardType: TextInputType.number,
+                autofocus: true,
+                decoration: InputDecoration(
+                  labelText: "المبلغ",
+                  border: OutlineInputBorder(
+                    borderRadius: BorderRadius.circular(12),
+                  ),
+                ),
+              ),
+            ],
+          ),
+          actions: [
+            TextButton(
+              onPressed: () => Navigator.pop(ctx),
+              child: const Text("إلغاء"),
+            ),
+            ElevatedButton(
+              style: ElevatedButton.styleFrom(
+                backgroundColor: isDeposit
+                    ? const Color(0xFF10B981)
+                    : const Color(0xFFEF4444),
+                foregroundColor: Colors.white,
+              ),
+              onPressed: () async {
+                final amount = double.tryParse(amountController.text);
+                if (amount != null && amount > 0) {
+                  final finalAmount = isDeposit ? amount : -amount;
+                  final tx = Transaction(
+                    id: DateTime.now().millisecondsSinceEpoch.toString(),
+                    partyId: 'internal',
+                    partyType: PartyType.internal,
+                    amount: finalAmount,
+                    date: DateTime.now(),
+                    type: TransactionType.payment,
+                    note: isDeposit ? 'إيداع يدوي' : 'سحب يدوي',
+                  );
+
+                  await context.read<TransactionRepository>().addTransaction(
+                    tx,
+                  );
+                  if (context.mounted) {
+                    context.read<DashboardCubit>().loadDashboardData();
+                    Navigator.pop(ctx);
+                  }
+                }
+              },
+              child: Text(isDeposit ? "تأكيد الإيداع" : "تأكيد السحب"),
+            ),
+          ],
+        ),
       ),
     );
   }

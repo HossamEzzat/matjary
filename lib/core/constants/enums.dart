@@ -1,4 +1,4 @@
-enum PartyType { customer, supplier }
+enum PartyType { customer, supplier, internal }
 
 enum TransactionType {
   credit, // Incoming money (from customer) or Debt (from supplier - wait, definitions vary)

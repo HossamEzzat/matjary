@@ -108,15 +108,23 @@ class TransactionsListView extends StatelessWidget {
                         vertical: 4,
                       ),
                       decoration: BoxDecoration(
-                        color: const Color(0xFFF59E0B).withValues(alpha: 0.1),
+                        color:
+                            (transaction.partyType == PartyType.internal
+                                    ? const Color(0xFFF59E0B)
+                                    : const Color(0xFFF59E0B))
+                                .withValues(alpha: 0.1),
                         borderRadius: BorderRadius.circular(20),
                       ),
                       child: Text(
                         transaction.partyType == PartyType.supplier
                             ? "مورد"
-                            : "عميل",
-                        style: const TextStyle(
-                          color: Color(0xFFF59E0B),
+                            : transaction.partyType == PartyType.customer
+                            ? "عميل"
+                            : "خزينة",
+                        style: TextStyle(
+                          color: transaction.partyType == PartyType.internal
+                              ? const Color(0xFFF59E0B)
+                              : const Color(0xFFF59E0B),
                           fontWeight: FontWeight.bold,
                           fontSize: 12,
                         ),
