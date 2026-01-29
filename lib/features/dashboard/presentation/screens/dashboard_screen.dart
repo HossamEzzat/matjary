@@ -10,7 +10,6 @@ import 'package:khazina/features/customers/domain/repositories/customer_reposito
 import 'package:khazina/features/transactions/domain/entities/transaction.dart';
 import 'package:khazina/features/transactions/domain/repositories/transaction_repository.dart';
 import 'package:khazina/core/constants/enums.dart';
-import 'package:khazina/features/dashboard/presentation/cubit/dashboard_cubit.dart';
 
 class DashboardScreen extends StatelessWidget {
   const DashboardScreen({super.key});
