@@ -5,6 +5,7 @@ import 'package:khazina/features/customers/presentation/cubit/customers_state.da
 import 'package:khazina/features/customers/presentation/screens/add_customer_screen.dart';
 import 'package:khazina/features/customers/presentation/screens/customer_details_screen.dart';
 import 'package:khazina/features/customers/domain/repositories/customer_repository.dart';
+import 'package:khazina/core/constants/app_constants.dart';
 
 class CustomersListScreen extends StatelessWidget {
   const CustomersListScreen({super.key});
@@ -27,7 +28,7 @@ class CustomersListView extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(title: const Text('العملاء')),
       floatingActionButton: FloatingActionButton(
-        backgroundColor: const Color(0xFFF59E0B),
+        backgroundColor: AppConstants.kPrimaryColor,
         onPressed: () {
           Navigator.push(
             context,
@@ -111,8 +112,8 @@ class CustomersListView extends StatelessWidget {
                                 fontSize: 16,
                                 fontWeight: FontWeight.bold,
                                 color: customer.balance > 0
-                                    ? const Color(0xFF10B981)
-                                    : const Color(0xFFEF4444),
+                                    ? AppConstants.kSecondaryColor
+                                    : AppConstants.kErrorColor,
                                 fontFamily: 'Roboto',
                               ),
                             ),
@@ -121,8 +122,8 @@ class CustomersListView extends StatelessWidget {
                               style: TextStyle(
                                 fontSize: 12,
                                 color: customer.balance > 0
-                                    ? const Color(0xFF10B981)
-                                    : const Color(0xFFEF4444),
+                                    ? AppConstants.kSecondaryColor
+                                    : AppConstants.kErrorColor,
                               ),
                             ),
                           ],

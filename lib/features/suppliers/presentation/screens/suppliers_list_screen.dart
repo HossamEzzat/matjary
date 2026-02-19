@@ -5,6 +5,7 @@ import 'package:khazina/features/suppliers/presentation/cubit/suppliers_state.da
 import 'package:khazina/features/suppliers/domain/repositories/supplier_repository.dart';
 import 'add_supplier_screen.dart';
 import 'supplier_details_screen.dart';
+import 'package:khazina/core/constants/app_constants.dart';
 
 class SuppliersListScreen extends StatelessWidget {
   const SuppliersListScreen({super.key});
@@ -27,7 +28,7 @@ class SuppliersListView extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(title: const Text('الموردين')),
       floatingActionButton: FloatingActionButton(
-        backgroundColor: const Color(0xFFF59E0B),
+        backgroundColor: AppConstants.kPrimaryColor,
         onPressed: () {
           Navigator.push(
             context,
@@ -45,7 +46,9 @@ class SuppliersListView extends StatelessWidget {
         builder: (context, state) {
           if (state is SuppliersLoading) {
             return const Center(
-              child: CircularProgressIndicator(color: Color(0xFFF59E0B)),
+              child: CircularProgressIndicator(
+                color: AppConstants.kPrimaryColor,
+              ),
             );
           } else if (state is SuppliersError) {
             return Center(child: Text('خطأ: ${state.message}'));
@@ -107,8 +110,8 @@ class SuppliersListView extends StatelessWidget {
                                 fontSize: 16,
                                 fontWeight: FontWeight.bold,
                                 color: supplier.balance > 0
-                                    ? const Color(0xFFEF4444)
-                                    : const Color(0xFF10B981),
+                                    ? AppConstants.kErrorColor
+                                    : AppConstants.kSecondaryColor,
                                 fontFamily: 'Roboto',
                               ),
                             ),
@@ -117,8 +120,8 @@ class SuppliersListView extends StatelessWidget {
                               style: TextStyle(
                                 fontSize: 12,
                                 color: supplier.balance > 0
-                                    ? const Color(0xFFEF4444)
-                                    : const Color(0xFF10B981),
+                                    ? AppConstants.kErrorColor
+                                    : AppConstants.kSecondaryColor,
                               ),
                             ),
                           ],

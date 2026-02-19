@@ -100,18 +100,18 @@ class KhazinaApp extends StatelessWidget {
         ],
         theme: ThemeData(
           brightness: Brightness.dark,
-          scaffoldBackgroundColor: const Color(0xFF0F172A), // Slate Dark
-          primaryColor: const Color(0xFFF59E0B), // Amber/Golden
+          scaffoldBackgroundColor: AppConstants.kBackgroundColor,
+          primaryColor: AppConstants.kPrimaryColor,
           colorScheme: const ColorScheme.dark(
-            primary: Color(0xFFF59E0B),
-            secondary: Color(0xFF10B981), // Emerald
-            surface: Color(0xFF1E293B), // Slate Card
-            error: Color(0xFFEF4444),
+            primary: AppConstants.kPrimaryColor,
+            secondary: AppConstants.kSecondaryColor,
+            surface: AppConstants.kSurfaceColor,
+            error: AppConstants.kErrorColor,
           ),
           useMaterial3: true,
           textTheme: GoogleFonts.cairoTextTheme(ThemeData.dark().textTheme),
           appBarTheme: const AppBarTheme(
-            backgroundColor: Color(0xFF1E293B),
+            backgroundColor: AppConstants.kSurfaceColor,
             elevation: 0,
             centerTitle: true,
           ),

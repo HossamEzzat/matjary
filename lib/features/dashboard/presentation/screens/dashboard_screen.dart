@@ -10,6 +10,7 @@ import 'package:khazina/features/customers/domain/repositories/customer_reposito
 import 'package:khazina/features/transactions/domain/entities/transaction.dart';
 import 'package:khazina/features/transactions/domain/repositories/transaction_repository.dart';
 import 'package:khazina/core/constants/enums.dart';
+import 'package:khazina/core/constants/app_constants.dart';
 
 class DashboardScreen extends StatelessWidget {
   const DashboardScreen({super.key});
@@ -47,7 +48,7 @@ class DashboardScreen extends StatelessWidget {
                       context,
                       'خزينة المحل',
                       state.totalTreasury,
-                      const Color(0xFFF59E0B),
+                      AppConstants.kPrimaryColor,
                       Icons.account_balance_wallet_rounded,
                     ),
                     const SizedBox(height: 16),
@@ -58,7 +59,7 @@ class DashboardScreen extends StatelessWidget {
                             context,
                             'عليك',
                             state.totalPayables,
-                            const Color(0xFFEF4444),
+                            AppConstants.kErrorColor,
                             Icons.arrow_circle_down_rounded,
                             isSmall: true,
                           ),
@@ -69,7 +70,7 @@ class DashboardScreen extends StatelessWidget {
                             context,
                             'لك',
                             state.totalReceivables,
-                            const Color(0xFF10B981),
+                            AppConstants.kSecondaryColor,
                             Icons.arrow_circle_up_rounded,
                             isSmall: true,
                           ),
@@ -151,18 +152,22 @@ class DashboardScreen extends StatelessWidget {
     return Container(
       decoration: BoxDecoration(
         gradient: LinearGradient(
-          colors: [color.withValues(alpha: 0.8), color.withValues(alpha: 0.6)],
+          colors: [color, color.withValues(alpha: 0.7)],
           begin: Alignment.topLeft,
           end: Alignment.bottomRight,
         ),
-        borderRadius: BorderRadius.circular(24),
+        borderRadius: BorderRadius.circular(28),
         boxShadow: [
           BoxShadow(
-            color: color.withValues(alpha: 0.3),
-            blurRadius: 15,
-            offset: const Offset(0, 8),
+            color: color.withValues(alpha: 0.25),
+            blurRadius: 20,
+            offset: const Offset(0, 10),
           ),
         ],
+        border: Border.all(
+          color: Colors.white.withValues(alpha: 0.1),
+          width: 1,
+        ),
       ),
       padding: const EdgeInsets.all(24),
       child: Column(
@@ -313,16 +318,16 @@ class DashboardScreen extends StatelessWidget {
   }) {
     return Container(
       decoration: BoxDecoration(
-        color: const Color(0xFF1E293B), // Slate Card
-        borderRadius: BorderRadius.circular(20),
+        color: AppConstants.kSurfaceColor,
+        borderRadius: BorderRadius.circular(24),
         boxShadow: [
           BoxShadow(
-            color: Colors.black.withValues(alpha: 0.2),
-            blurRadius: 10,
-            offset: const Offset(0, 5),
+            color: Colors.black.withValues(alpha: 0.15),
+            blurRadius: 12,
+            offset: const Offset(0, 6),
           ),
         ],
-        border: Border.all(color: color.withValues(alpha: 0.2), width: 1),
+        border: Border.all(color: color.withValues(alpha: 0.1), width: 1),
       ),
       padding: EdgeInsets.all(isSmall ? 16 : 24),
       child: Row(
@@ -380,15 +385,15 @@ class DashboardScreen extends StatelessWidget {
       child: Ink(
         height: 90,
         decoration: BoxDecoration(
-          color: const Color(0xFF1E293B),
-          borderRadius: BorderRadius.circular(20),
+          color: AppConstants.kSurfaceColor,
+          borderRadius: BorderRadius.circular(24),
           border: Border.all(
-            color: const Color(0xFFF59E0B).withValues(alpha: 0.1),
+            color: AppConstants.kPrimaryColor.withValues(alpha: 0.05),
           ),
           boxShadow: [
             BoxShadow(
               color: Colors.black.withValues(alpha: 0.1),
-              blurRadius: 8,
+              blurRadius: 10,
               offset: const Offset(0, 4),
             ),
           ],

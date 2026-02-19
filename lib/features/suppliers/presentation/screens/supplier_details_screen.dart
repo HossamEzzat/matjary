@@ -7,6 +7,7 @@ import 'package:khazina/features/transactions/domain/repositories/transaction_re
 import 'package:khazina/features/suppliers/domain/repositories/supplier_repository.dart';
 import 'package:khazina/core/constants/enums.dart';
 import 'package:khazina/features/transactions/domain/entities/transaction.dart';
+import 'package:khazina/core/constants/app_constants.dart';
 import 'package:uuid/uuid.dart';
 
 class SupplierDetailsScreen extends StatelessWidget {
@@ -134,7 +135,7 @@ class _SupplierDetailsViewState extends State<SupplierDetailsView> {
                 ),
               ],
               border: Border.all(
-                color: const Color(0xFFF59E0B).withValues(alpha: 0.2),
+                color: AppConstants.kPrimaryColor.withValues(alpha: 0.2),
               ),
             ),
             child: Column(
@@ -163,8 +164,8 @@ class _SupplierDetailsViewState extends State<SupplierDetailsView> {
                   style: TextStyle(
                     fontSize: 14,
                     color: currentSupplier.balance > 0
-                        ? const Color(0xFFEF4444)
-                        : const Color(0xFF10B981),
+                        ? AppConstants.kErrorColor
+                        : AppConstants.kSecondaryColor,
                   ),
                 ),
                 const SizedBox(height: 24),
@@ -187,7 +188,7 @@ class _SupplierDetailsViewState extends State<SupplierDetailsView> {
                           TransactionType.debt,
                         ),
                         style: ElevatedButton.styleFrom(
-                          backgroundColor: const Color(0xFFEF4444),
+                          backgroundColor: AppConstants.kErrorColor,
                           padding: const EdgeInsets.symmetric(vertical: 12),
                           shape: RoundedRectangleBorder(
                             borderRadius: BorderRadius.circular(10),
@@ -213,7 +214,7 @@ class _SupplierDetailsViewState extends State<SupplierDetailsView> {
                           TransactionType.payment,
                         ),
                         style: ElevatedButton.styleFrom(
-                          backgroundColor: const Color(0xFF10B981),
+                          backgroundColor: AppConstants.kSecondaryColor,
                           padding: const EdgeInsets.symmetric(vertical: 12),
                           shape: RoundedRectangleBorder(
                             borderRadius: BorderRadius.circular(10),
@@ -245,7 +246,9 @@ class _SupplierDetailsViewState extends State<SupplierDetailsView> {
               builder: (context, state) {
                 if (state is TransactionLoading) {
                   return const Center(
-                    child: CircularProgressIndicator(color: Color(0xFFF59E0B)),
+                    child: CircularProgressIndicator(
+                      color: AppConstants.kPrimaryColor,
+                    ),
                   );
                 }
                 if (state is TransactionLoaded) {
@@ -272,8 +275,8 @@ class _SupplierDetailsViewState extends State<SupplierDetailsView> {
                             border: Border(
                               right: BorderSide(
                                 color: isDebt
-                                    ? const Color(0xFFEF4444)
-                                    : const Color(0xFF10B981),
+                                    ? AppConstants.kErrorColor
+                                    : AppConstants.kSecondaryColor,
                                 width: 4,
                               ),
                             ),
@@ -338,8 +341,8 @@ class _SupplierDetailsViewState extends State<SupplierDetailsView> {
                                 fontWeight: FontWeight.bold,
                                 fontSize: 16,
                                 color: isDebt
-                                    ? const Color(0xFFEF4444)
-                                    : const Color(0xFF10B981),
+                                    ? AppConstants.kErrorColor
+                                    : AppConstants.kSecondaryColor,
                               ),
                             ),
                           ),
@@ -402,10 +405,6 @@ class _AddTransactionDialogState extends State<AddTransactionDialog> {
         mainAxisSize: MainAxisSize.min,
         children: [
           DropdownButtonFormField<TransactionType>(
-            // key: ValueKey(_type), // Ensure rebuild if needed (though local state update might handle it if we just use initialValue? No, usually initialValue is one-off)
-            // Actually, if we use initialValue, we should rely on FormField state.
-            // But I will stick to Key to be safe.
-            key: ValueKey(_type),
             initialValue: _type,
             dropdownColor: const Color(0xFF2C2C2C),
             items: const [
@@ -444,7 +443,7 @@ class _AddTransactionDialogState extends State<AddTransactionDialog> {
                 borderRadius: BorderRadius.circular(12),
               ),
               focusedBorder: OutlineInputBorder(
-                borderSide: const BorderSide(color: Color(0xFFF59E0B)),
+                borderSide: const BorderSide(color: AppConstants.kPrimaryColor),
                 borderRadius: BorderRadius.circular(12),
               ),
             ),
@@ -458,7 +457,7 @@ class _AddTransactionDialogState extends State<AddTransactionDialog> {
         ),
         ElevatedButton(
           style: ElevatedButton.styleFrom(
-            backgroundColor: const Color(0xFFF59E0B),
+            backgroundColor: AppConstants.kPrimaryColor,
             foregroundColor: Colors.black,
           ),
           onPressed: () {

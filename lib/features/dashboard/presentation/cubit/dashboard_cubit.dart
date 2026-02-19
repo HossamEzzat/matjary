@@ -25,16 +25,10 @@ class DashboardCubit extends Cubit<DashboardState> {
 
       // Calculation:
       // Payables: Sum of supplier.balance.
-      final totalPayables = suppliers.fold(
-        0.0,
-        (sum, s) => sum + (s.balance ?? 0.0),
-      );
+      final totalPayables = suppliers.fold(0.0, (sum, s) => sum + s.balance);
 
       // Receivables: Sum of customer.balance.
-      final totalReceivables = customers.fold(
-        0.0,
-        (sum, c) => sum + (c.balance ?? 0.0),
-      );
+      final totalReceivables = customers.fold(0.0, (sum, c) => sum + c.balance);
 
       // Treasury calculation:
       // Customer Payments (Money In) - Supplier Payments (Money Out)

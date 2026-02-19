@@ -4,6 +4,7 @@ import 'package:khazina/features/transactions/presentation/cubit/transaction_cub
 import 'package:khazina/features/transactions/presentation/cubit/transaction_state.dart';
 import 'package:khazina/features/transactions/domain/repositories/transaction_repository.dart';
 import 'package:khazina/core/constants/enums.dart';
+import 'package:khazina/core/constants/app_constants.dart';
 
 class TransactionsListScreen extends StatelessWidget {
   const TransactionsListScreen({super.key});
@@ -30,7 +31,9 @@ class TransactionsListView extends StatelessWidget {
         builder: (context, state) {
           if (state is TransactionLoading) {
             return const Center(
-              child: CircularProgressIndicator(color: Color(0xFFD4AF37)),
+              child: CircularProgressIndicator(
+                color: AppConstants.kPrimaryColor,
+              ),
             );
           } else if (state is TransactionError) {
             return Center(child: Text('خطأ: ${state.message}'));
@@ -52,16 +55,23 @@ class TransactionsListView extends StatelessWidget {
                 return Container(
                   margin: const EdgeInsets.only(bottom: 12),
                   decoration: BoxDecoration(
-                    color: const Color(0xFF1E293B), // Slate Card
-                    borderRadius: BorderRadius.circular(16),
+                    color: AppConstants.kSurfaceColor,
+                    borderRadius: BorderRadius.circular(20),
                     border: Border.all(
                       color:
                           (isPayment
-                                  ? const Color(0xFF10B981)
-                                  : const Color(0xFFEF4444))
+                                  ? AppConstants.kSecondaryColor
+                                  : AppConstants.kErrorColor)
                               .withValues(alpha: 0.1),
                       width: 1,
                     ),
+                    boxShadow: [
+                      BoxShadow(
+                        color: Colors.black.withValues(alpha: 0.1),
+                        blurRadius: 8,
+                        offset: const Offset(0, 4),
+                      ),
+                    ],
                   ),
                   child: ListTile(
                     contentPadding: const EdgeInsets.symmetric(
@@ -73,16 +83,16 @@ class TransactionsListView extends StatelessWidget {
                       decoration: BoxDecoration(
                         color:
                             (isPayment
-                                    ? const Color(0xFF10B981)
-                                    : const Color(0xFFEF4444))
+                                    ? AppConstants.kSecondaryColor
+                                    : AppConstants.kErrorColor)
                                 .withValues(alpha: 0.1),
                         shape: BoxShape.circle,
                       ),
                       child: Icon(
                         isPayment ? Icons.arrow_downward : Icons.arrow_upward,
                         color: isPayment
-                            ? const Color(0xFF10B981)
-                            : const Color(0xFFEF4444),
+                            ? AppConstants.kSecondaryColor
+                            : AppConstants.kErrorColor,
                         size: 24,
                       ),
                     ),
@@ -122,9 +132,7 @@ class TransactionsListView extends StatelessWidget {
                             ? "عميل"
                             : "خزينة",
                         style: TextStyle(
-                          color: transaction.partyType == PartyType.internal
-                              ? const Color(0xFFF59E0B)
-                              : const Color(0xFFF59E0B),
+                          color: AppConstants.kPrimaryColor,
                           fontWeight: FontWeight.bold,
                           fontSize: 12,
                         ),
